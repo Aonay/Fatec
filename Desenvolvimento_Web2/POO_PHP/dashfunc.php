@@ -1,30 +1,71 @@
 <!doctype html>
-<html lang="en">
+<html lang="pg-br">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>Calculo Funcinário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   </head>
-  <style>
-    .container{
-      height: 500px;
 
-    }
-  </style>
   <body>
 
+    <form class="container w-50 mt-5 bg-warning p-4">
+      <div class="mb-2 ">
+        <label class="form-label">Código</label>
+        <input type="text" class="form-control" name="txtCodigo" required> 
+      </div>
 
+      <div class="mb-2 ">
+        <label class="form-label">Nome</label>
+        <input type="text" class="form-control" name="txtCodigo" required> 
+      </div>
 
-    <div class="container bg-warning ">
-    <div class="container text-center ">
-      <div class="row align-items-center">
-        <div class="col-sm-8">Formulario</div>
-        <div class="col-sm-4">Resultado</div>
-     </div>
-    </div>
-    </div>
+      <div class="mb-2 ">
+        <label class="form-label">Valor da Hora</label>
+        <input type="number" class="form-control" name="txtCodigo" required> 
+      </div>
+
+      <div class="mb-2 ">
+        <label class="form-label">Horas Trabalhadas</label>
+        <input type="text" class="form-control" name="txtCodigo" required> 
+      </div>
+
+      <div class="d-grid gap-2">
+        <button type="submit" class="mt-2 btn btn-primary" name="btEnviar">Calcular Salário</button>
+      </div>
+    </form>
+
+  <div>
     
+    <div class="container w-50 mt-5 bg-warning p-2" >
+    <h1 class="text-center">Folha de Pagamento</h1>
+    <div class="container w-75 mt-5 bg-success ">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">df</th>
+            <td>Mark</td>
+          </tr>
+          <tr>
+            <th scope="row">hj</th>
+            <td>Jacob</td>
+          </tr>
+          <tr>
+            <th scope="row">hj</th>
+            <td>Larry the Bird</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+
+
+    
+
+
+
+
 
 
 
