@@ -12,23 +12,33 @@
 
 <style>
   .container{
-    width: 500px;
-    background-color: greenyellow;
+    
+    background-color: #cdf2d6;
+
+  }
+  body{
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    background-image: url("/bg2.jpg");
+    background-size: cover;
   }
 </style>
-<div class="container">
+<div class="container w- p-5 mt-5 rounded-2">
 
-<div class="mt-5 d-flex justify-content-center">
+<div class="container mt-5 justify-content-center">
     <h1>Hello, world!</h1>
   </div>
 
-  <div class="mt-5 d-flex justify-content-center">
+  <div class="container mt-5 d-flex justify-content-center">
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita repudiandae ipsum tempore possimus temporibus hic omnis eos rerum, ex quaerat voluptatem aliquid error, cumque adipisci? Fuga voluptas officia perspiciatis corrupti.</p>
   </div>
 
-    <div class="d-flex justify-content-center ">
-      <button type="button" class="btn btn-primary btn-lg m-2">Funcionario</button>
-      <button type="button" class="btn btn-primary btn-lg m-2">Comissionado</button>
+    <div class="container justify-content-center ">
+
+      <a href="/dashfunc.php"><button type="button" class="btn btn-primary btn-lg m-1">Funcionario</button></a>
+
+      <a href="/dashcomi.php"><button type="button" class="btn btn-primary btn-lg m-1">Comissionado</button></a>
 
     </div>
 
