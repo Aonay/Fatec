@@ -30,6 +30,32 @@ public class Main {
         System.out.println(contac1.getLimite());
         System.out.println(contac1.getSaldo());
         
+        System.out.println("Depositando: R$150,00");
+        contac1.depositar(150);
+        System.out.println(contac1.getLimite());
+        System.out.println(contac1.getSaldo());
+        
+        System.out.println("Depositando: R$150,00");
+        contac1.depositar(150);
+        System.out.println(contac1.getLimite());
+        System.out.println(contac1.getSaldo());
+        
+        System.out.println("Depositando na poupança: R$150,00");
+        contap1.depositar(150);
+        System.out.println(contap1.getSaldo());
+        
+        System.out.println("Tentando sacar da poupança");
+        contap1.sacar(150);
+        System.out.println(contap1.getSaldo());
+        
+        System.out.println("Resgatando para CC: ");
+        contap1.resgatar(150);
+        System.out.println(contap1.getSaldo());
+        System.out.println(contac1.getSaldo());
+        
+        
+        
+        
         
       
 
