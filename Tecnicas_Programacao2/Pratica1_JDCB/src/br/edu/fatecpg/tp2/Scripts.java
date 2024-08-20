@@ -54,6 +54,46 @@ public class Scripts {
         tarefas.forEach(System.out::println);
 
     }
+    public static void exibirporStatus(boolean status) throws SQLException {
+        Connection connection=null;
+        connection=Conexao.connection();
+
+        List<Tarefa> tarefas = new ArrayList<>();
+
+        String query = "SELECT * FROM tarefas WHERE status = ?";
+
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setBoolean(1,status);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()){
+            tarefas.add(new Tarefa(rs.getInt("id"),rs.getString("nome"),rs.getString("categoria"),rs.getBoolean("status")));
+        }
+
+        tarefas.forEach(System.out::println);
+
+    }
+
+    public static void exibirporCategoria(String categoria) throws SQLException {
+        Connection connection=null;
+        connection=Conexao.connection();
+
+        List<Tarefa> tarefas = new ArrayList<>();
+
+        String query = "SELECT * FROM tarefas WHERE categoria = ?";
+
+        PreparedStatement stmt = connection.prepareStatement(query);
+        stmt.setString(1,categoria);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()){
+            tarefas.add(new Tarefa(rs.getInt("id"),rs.getString("nome"),rs.getString("categoria"),rs.getBoolean("status")));
+        }
+
+        tarefas.forEach(System.out::println);
+
+    }
+
 
     public static void editarTarefa(String nome,String categoria,int id) throws SQLException {
         Connection connection=null;
@@ -105,18 +145,35 @@ public class Scripts {
 
     }
 
-    public static void marcarTarefa(boolean status,int id) throws SQLException {
-        Connection connection=null;
-        connection=Conexao.connection();
+    public static void marcarTarefa(int id) throws SQLException {
+        Connection connection = null;
+        connection = Conexao.connection();
 
-        String query = "UPDATE tarefas SET status = ? WHERE id =?";
+        String querySelect = "SELECT status FROM tarefas WHERE id = ?";
+        String queryUpdate = "UPDATE tarefas SET status = ? WHERE id = ?";
 
-        try{
-            PreparedStatement stmt = connection.prepareStatement(query);
-            stmt.setBoolean(1,status);
-            stmt.setInt(2,id);
-            stmt.executeUpdate();
-            System.out.println("Concluida");
+        try {
+
+            PreparedStatement stmtSelect = connection.prepareStatement(querySelect);
+            stmtSelect.setInt(1, id);
+            ResultSet rs = stmtSelect.executeQuery();
+
+            boolean status = false;
+            if (rs.next()) {
+                status = rs.getBoolean("status");
+            }
+
+
+            status = !status;
+
+
+            PreparedStatement stmtUpdate = connection.prepareStatement(queryUpdate);
+            stmtUpdate.setBoolean(1, status);
+            stmtUpdate.setInt(2, id);
+            stmtUpdate.executeUpdate();
+
+            System.out.println("Status da tarefa atualizado com sucesso.");
+
 
 
         }catch (SQLException e){

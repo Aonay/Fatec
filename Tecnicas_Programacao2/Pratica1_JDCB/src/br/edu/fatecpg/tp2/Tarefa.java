@@ -29,9 +29,19 @@ public class Tarefa {
     public static void verTarefa() throws SQLException {
         Scripts.exibirTarefas();
     }
+    public static void verPorStatus(boolean status) throws SQLException {
+        Scripts.exibirporStatus(status);
+    }
+    public static void verPorCategoria(String nome) throws SQLException {
+        Scripts.exibirporCategoria(nome);
+    }
 
     public static void delTarefa(int id) throws SQLException {
         Scripts.excluirTarefa(id);
+    }
+
+    public static void marcTarefa(int id) throws SQLException {
+        Scripts.marcarTarefa(id);
     }
 
     public int getId() {
