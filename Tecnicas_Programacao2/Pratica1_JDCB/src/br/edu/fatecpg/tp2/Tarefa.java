@@ -68,17 +68,27 @@ public class Tarefa {
         return status;
     }
 
+    public static String getStatus(boolean status){
+        if(status==false){
+            return "PENDENTE";
+        }else{
+            return "CONCLUIDO";
+        }
+    }
+
     public void setStatus(boolean status) {
         this.status = status;
     }
 
     @Override
     public String toString() {
-        return "Tarefa{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", status=" + status +
-                '}';
+        return String.format(
+                "ID: %-2d │ Nome: %-20s │ Categoria: %-10s │ Status: %-10s\n%s",
+                id,
+                nome,
+                categoria,
+                Tarefa.getStatus(status),
+                "────────────────────────────────────────────────────────────────────────────────────"
+        );
     }
 }

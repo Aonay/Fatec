@@ -23,15 +23,18 @@ public class Main {
 
         boolean menu = true;
         while (menu){
+            System.out.println("╔════════════════════════════════╗");
+            System.out.println("║     GERENCIADOR DE TAREFAS     ║");
+            System.out.println("╠════════════════════════════════╣");
+            System.out.println("║   Digite o numero da opção:    ║");
+            System.out.println("║ 1 - Adicionar tarefas          ║");
+            System.out.println("║ 2 - Exibir tarefas             ║");
+            System.out.println("║ 3 - Editar tarefas             ║");
+            System.out.println("║ 4 - Excluir tarefas            ║");
+            System.out.println("║ 5 - Alterar Status             ║");
+            System.out.println("║ 6 - SAIR                       ║");
+            System.out.println("╚════════════════════════════════╝");
 
-            System.out.println("GERENCIADOR DE TAREFAS");
-            System.out.println("Digite o numero da opção:");
-            System.out.println("1 - Adicionar tarefas");
-            System.out.println("2 - Exibir tarefas");
-            System.out.println("3 - Editar tarefas");
-            System.out.println("4 - Excluir tarefas");
-            System.out.println("5 - Alterar Status");
-            System.out.println("6 - SAIR");
 
             int escolha = scan.nextInt();
             scan.nextLine();
@@ -60,12 +63,12 @@ public class Main {
                         System.out.println("Digite: ");
                         System.out.println("1 - Para ver por Status ");
                         System.out.println("2 - Para ver por Categoria");
-                        System.out.println("3 - VOLTAR");
+                        System.out.print("3 - VOLTAR                     : ");
                         int filtro = scan.nextInt();
                         scan.nextLine();
                         switch (filtro) {
                             case 1:
-                                System.out.println("Ver Pendentes ou Concluidas? p/c");
+                                System.out.print("Ver PENDENTES ou CONCLUIDAS? p/c : ");
                                 String resp = scan.nextLine();
                                 if (resp.equals("p")) {
                                     boolean status = false;
@@ -76,7 +79,7 @@ public class Main {
                                 }
                                 break;
                             case 2:
-                                System.out.println("Qual categoria deseja exbir?");
+                                System.out.print("Qual categoria deseja exbir? : ");
                                 String cat = scan.nextLine();
                                 Tarefa.verPorCategoria(cat);
                                 break;
@@ -90,14 +93,23 @@ public class Main {
                 case 3:
                     Tarefa.verTarefa();
 
-                    System.out.print("Digite o ID da tarefa que deseja editar: ");
-                    int idbusc = scan.nextInt();
-                    scan.nextLine();
-                    System.out.print("Novo nome: ");
-                    String nvnome = scan.nextLine();
-                    System.out.print("Nova categoria: ");
-                    String nvcat = scan.nextLine();
-                    Tarefa.editarTarefa(nvnome, nvcat, idbusc);
+                    boolean editarefa = true;
+                    while (editarefa) {
+
+                        System.out.print("Digite o ID da tarefa que deseja editar: ");
+                        int idbusc = scan.nextInt();
+                        scan.nextLine();
+                        System.out.print("Novo nome: ");
+                        String nvnome = scan.nextLine();
+                        System.out.print("Nova categoria: ");
+                        String nvcat = scan.nextLine();
+                        Tarefa.editarTarefa(nvnome, nvcat, idbusc);
+                        System.out.println("Deseja editar outra tarefa? s/n");
+                        String editresp= scan.nextLine();
+                        if(editresp.equals("n")){
+                            editarefa=false;
+                        }
+                    }
                     break;
 
                 case 4:
@@ -119,7 +131,7 @@ public class Main {
                     break;
 
                 case 6:
-                    manu=false;
+                    menu=false;
 
 
             }
