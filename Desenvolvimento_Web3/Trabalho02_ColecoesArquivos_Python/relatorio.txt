@@ -1,0 +1,14 @@
+         Relatório de Vendas         
+_____________________________________
+VENDAS POR PRODUTO:
+Produto A R$ 400.00
+Produto B R$ 615.00
+Produto C R$ 700.00
+Produto D R$ 7800.00
+-------------------------------------
+VENDAS POR DIA:
+2024-08-15 R$ 1100.00
+2024-08-25 R$ 8415.00
+-------------------------------------
+TOTAL DE VENDAS:
+R$ 9515.00

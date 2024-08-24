@@ -1,3 +1,4 @@
+1
 #1. Crie um programa em Python que permita ao usuário cadastrar seus contatos com
 #nome e número de telefone. O programa deve utilizar um dicionário para armazenar os
 #contatos, onde o nome é a chave e o número de telefone é o valor. O programa deve
