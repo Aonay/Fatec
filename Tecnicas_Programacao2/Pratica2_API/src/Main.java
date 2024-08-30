@@ -2,29 +2,51 @@ import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[]args) throws IOException, InterruptedException {
-        Gson gson = new Gson();
-        System.out.println("Olá Mundo!");
-        var buscaEnd = new ConsomeApi();
-
-
+    public static void main(String[]args) throws IOException, InterruptedException, SQLException {
+        Connection connection = null;
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("Digite o cep: ");
-        int cep = scan.nextInt();
-        String json1 =buscaEnd.retorneEnd(cep);
-        System.out.println(json1);
-        Endereco endereco = gson.fromJson(json1,Endereco.class);
-        String json2 =buscaEnd.retorneDataHora();
-        Data data = gson.fromJson(json2,Data.class);
-        System.out.println(endereco);
-        System.out.println(data);
-        FileWriter  consulta = new FileWriter("consulta.txt",true);
-        consulta.write(endereco.logString()+data.toString());
-        consulta.close();
+        boolean flag = true;
+        while(flag){
+            Endereco.menu();
+
+            int escolha = scan.nextInt();
+            scan.nextLine();
+
+            switch (escolha){
+                case 1:
+                    boolean consulta = true;
+                            while(consulta){
+                                Endereco.consultarCep();
+                                System.out.print("Gostaria de consultar outro? S/N: ");
+                                String cont = scan.nextLine();
+                                if (cont.equals("n")){
+                                    consulta=false;
+                                }
+                            }
+                            break;
+                case 2:
+                    Endereco.exibirConsultas();
+                    break;
+                case 3:
+                    System.out.println("Encerrando sistema...");
+                    flag=false;
+
+
+
+
+
+
+            }
+
+        }
+
 
 
     }//fim
