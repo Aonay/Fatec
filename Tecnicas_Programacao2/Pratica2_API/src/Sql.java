@@ -19,7 +19,7 @@ public class Sql {
 
         try(Statement stmt = connection.createStatement()) {
             stmt.execute(query);
-            System.out.println("Tabela Tarefas criada ou ja existia");
+            System.out.println("Tabela do BD consulta criada ou ja existia");
         }catch (SQLException e){
             System.out.println("Erro ao tentar CRIAR tabela: " + e.getMessage());
         }
