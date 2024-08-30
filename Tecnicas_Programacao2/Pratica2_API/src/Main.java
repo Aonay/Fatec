@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[]args) throws IOException, InterruptedException, SQLException {
         Connection connection = null;
         Scanner scan = new Scanner(System.in);
+        Sql.criarTabela();
 
         boolean flag = true;
         while(flag){
