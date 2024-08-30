@@ -1,7 +1,8 @@
 class Filme:
-	def __init__(self,titulo,ano,disponibilidade):
+	def __init__(self,titulo,ano,genero):
 		self.titulo = titulo
 		self.ano = ano
-		self.disponibilidade=disponibilidade
+		self.genero = genero
+		self.disp = True
 		
 	
