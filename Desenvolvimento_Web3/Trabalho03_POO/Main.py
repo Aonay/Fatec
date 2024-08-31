@@ -1,40 +1,64 @@
 from Locadora import Locadora
 
-menu = True
-
-while menu:
+while True:
   Locadora.menu()
 
   op = int(input("Opção → "))
 
   if op == 1:
-    rep = True
-    print("----------Cadastrando de filmes:--------- ")
-    while rep:
+    print("──────── Cadastrando Filme: ─────────\n")
+    while True:
       Locadora.addFilme()
-      resp = str(input("Adicionar outro? S/N: →"))
+      resp = input("────── Adicionar outro? S/N: → ").strip().lower()
+      if resp == 'n':
+        break
+
+  elif op == 2:
+    print("──────── Cadastrando Cliente: ────────\n")
+    while True:
+      Locadora.addCliente()
+      resp = input("────── Adicionar outro? S/N: → ").strip().lower()
       if resp == "n":
-        rep=False
         break
       
+  elif op == 3:
+    print("────────── Alugando Filme: ──────────\n")
+    while True:
+      Locadora.alugarFilme()
+      resp = input("────── Alugar outro? S/N: → ").strip().lower()
+      if resp == 'n':
+        break
       
   elif op == 4:
-    rep = True
-    while rep:
-      op = input("Deseja listar: [1] disponíveis, [2] Alugados ou [3] Todos? ")
+    print("────────── Listando Filmes: ──────────\n")
+    while True:
+      op = input("Deseja listar:\n [1] disponíveis\n [2] Alugados\n [3] Todos?\n → ")
 
-      if   op ==1:
+      if   op =='1':
         Locadora.exibirFilmes(True)
-      elif op ==2:
+      elif op =='2':
         Locadora.exibirFilmes(False)
       else:
         Locadora.exibirFilmes()
 
-      resp = str(input("Listar novamente? S/N: →"))
+      resp = input("───── Listar novamente? S/N: → ").strip().lower()
       if resp == "n":
-        rep=False
-      else:
         break
+
+  elif op == 5:
+    print("────────── Listando Clientes: ──────────\n")
+    while True:
+      Locadora.exibirClientes()
+      resp = input("─────Listar novamente? S/N: → \n").strip().lower()
+      if resp == "n":
+        break
+
+
+  elif op==6:
+    print("Encerrango programa...")
+    break
+
+
     
 
   
