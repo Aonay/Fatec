@@ -1,0 +1,87 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que a altura mínima da página seja 100% da altura da janela */
+  
+}
+
+nav {
+  position: fixed; /* Fixa o elemento na posição */
+  top: 0; /* Alinha ao topo da página */
+  left: 0; /* Alinha à esquerda da página */
+  width: 100%; /* Garante que o nav ocupe toda a largura da tela */
+  z-index: 1000; /* Garante que o nav fique acima de outros elementos */
+}
+
+main {
+  flex: 1; /* Faz com que o main ocupe o espaço disponível */
+  padding-top: 100px; /* Ajuste esta altura conforme a altura do seu nav */
+
+
+  
+}
+#ctnmeio{
+  width: 900px;
+}
+
+h1{
+  color: aliceblue;
+  font-family: "Merienda", system-ui;
+  font-optical-sizing: auto;
+
+}
+
+
+
+#fesquerda{
+  transform: scaleX(-1);
+  width: 100px;
+}
+#fdireita{
+  width: 100px;
+}
+
+footer {
+  background-color: #f8f9fa; /* Cor de fundo opcional para o rodapé */
+}
+#logo{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  
+}
+#rec{
+  width: 300px;
+  border-radius: 15px;
+}
+.bg-success {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+}
+.nav-link {
+  border-radius: 5px;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Transição suave */
+}
+
+.nav-link:hover {
+  color: #fff; /* Cor do texto ao passar o mouse */
+  background-color: #28a745; /* Cor de fundo ao passar o mouse */
+  border-radius: 5px; /* Bordas arredondadas para o efeito */
+  font-size: 18px;
+}
+
+#btnEntrar{
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out; /* Transição suave */
+}
+
+#btnEntrar:hover{
+  color: #fff; /* Cor do texto ao passar o mouse */
+  font-size: 20px;
+}
+#ecoacao {
+  font-family: 'Merienda', cursive; /* Use a fonte que você carregou do Google Fonts */
+  font-size: 1.5rem; /* Ajuste o tamanho conforme necessário */
+  line-height: 1; /* Ajusta o espaçamento vertical para alinhar com a imagem */
+  color: #fff; /* Ou qualquer cor que combine com o design do seu cabeçalho */
+
+}
