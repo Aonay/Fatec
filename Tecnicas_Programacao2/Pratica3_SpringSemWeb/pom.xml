@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.edu.fatecpg.tp2</groupId>
-	<artifactId>Pratica3_Spring</artifactId>
+	<artifactId>Pratica3_SpringSemWeb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Pratica3_Spring</name>
-	<description>Demo project for Spring Boot Application Info</description>
+	<name>SpringSemWeb</name>
+	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -40,6 +40,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.18.0-rc1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
