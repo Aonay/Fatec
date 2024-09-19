@@ -1,0 +1,38 @@
+passos para projeto com maven e spring
+Ir no Spring initializer
+ -maven, java,vers 3.3.3 nome br.edu.fatecpg. packgename , jar, java17 sem dependencias generete
+ exttair projeto
+ abrir no intelj
+ aguardar downloado
+ abrir o java doc 17 para ver documenbtacao apiDocumentation 
+ pegar https request response
+ no site mvn repository para pegar o jackson copiar codigo no site
+ colocar no arquivo pom.xml
+ em src no main ja vem com o main como nome digitado no spring
+ - como nao é web é necessario implementar comandLierunner na classe do main
+ dentro do override fica o main para rodar no console
+ criar pacote view e colocar a apllication para view
+ ciar pacote model para as classes da entidade
+ criar em model uma classe tipo record
+ criar pacote service para armazenar os consome api e a respectiva classe com o metedo pra obter
+ fazer o http request\response copiando da documentacao e colando no metodo
+ colocar o link da api no request uri
+ criar return response.body();
+ criar objeto no mainaplication
+ chamar o metodo para obter a resposta da api em json
+ utilizar o jackson para decsserializer o json
+ na classe que vai armazenar o objeto da api
+ usar @JsonAlias("example") para encontar a palavra chave e adicionar atributo criado
+ inserir fora da classe @jsonignoreproprietes para igonorar as propriedades que nao serao usadas
+ criar conversor em service em formato de classe Interface 
+ nela criar um metodo generico de retorno generico T
+ criar a classe converte dado que implementa a interface de iConvertedado ConverteDado implements IConvertdado
+ criar objectMapper e implementar mapper.readValue(jsson,classe)
+ criar objeto no mainAPlication para implementar o convertdado
+ salvar o retorno da api numa variavel json
+ usar o metoro conversor
+ 
+ 
+ 
+ 
+ 
