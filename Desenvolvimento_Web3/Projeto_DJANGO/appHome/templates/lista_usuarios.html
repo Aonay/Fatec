@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %} Lista de Usuarios {% endblock %}
+
+{% block conteudo %}
+
+<h2>Usuarios</h2>
+  <ul>
+    {% for usuario in usuarios %}
+      <li> {{ usuario.nome }} ({{ usuario.sobrenome }}) </li>
+      <li> {{usuario.idade}} </li>
+      <li> {{usuario.curso}} </li>
+      {% endfor %}
+  </ul>
+
+  <a href="{% url 'criar_usuario' %}">Cadastrar novo Usuario</a>
+
+{% endblock %}
