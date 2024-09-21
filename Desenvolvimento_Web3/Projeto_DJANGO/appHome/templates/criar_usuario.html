@@ -11,11 +11,19 @@
     <div class="col-md-6  border border-warning rounded p-3">
       <h2>Cadastrar novo Usuário</h2>
       <form method="POST">
+
         {% csrf_token %}
+        {{ form.non_field_errors }}
+
         <label class="'form-label ">Nome completo</label>
         {{ form.nome }}
+
         <label class="form-label ">E-mail</label>
         {{ form.email }}
+         <div class="alert alert-danger mt-1 m-0 p-1" role="alert">
+          {{ form.email.errors }}
+        </div>
+        
         <label class="form-label ">Senha</label>
         {{ form.senha }}
         <div class="row p-3">

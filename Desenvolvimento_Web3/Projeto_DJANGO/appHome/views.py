@@ -6,8 +6,8 @@ from .models import Usuario
 from django.contrib import messages
 	
 def appHome(request):
-	template = loader.get_template("home.html")
-	return HttpResponse(template.render())
+	
+	return render(request,'home.html', {'messages': messages.get_messages(request)})
 
 def criar_usuario(request):
 	if request.method == 'POST':
