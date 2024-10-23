@@ -4,11 +4,15 @@
 
 {% block titulo %} Inicio {% endblock %}
 
-
-
 {% block conteudo %}
 
-
+{% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <div id="ctnmeio" class="container bg-warning text-center py-3 rounded">
 

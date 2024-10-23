@@ -40,21 +40,6 @@
     </div>
   </nav>
 
-  <div style="margin-top: 60px;">
-    {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-success alert-dismissible fade show text-align-center" role="alert">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close">
-        </button>
-      </div>
-    {% endfor %}
-    {% endif %}
-  </div>
-  
-  
-
-
   <main class="container">
     {% block conteudo %}
 

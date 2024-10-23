@@ -11,8 +11,3 @@ class UsuarioForm(forms.ModelForm):
             'senha': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite sua senha'}),
 
         }
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if Usuario.objects.filter(email=email).exists():
-            raise forms.ValidationError("Este e-mail já está cadastrado.")
-        return email
