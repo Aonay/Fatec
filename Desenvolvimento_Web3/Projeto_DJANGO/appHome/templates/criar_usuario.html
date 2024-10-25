@@ -8,17 +8,29 @@
 
 <div class="container ">
   <div class="row justify-content-center">
-    <div class="col-md-6  border border-warning rounded p-3">
+    <div class="col-md-6  border border-warning rounded p-3" style="max-width: 500px;">
       <h2>Cadastrar novo Usuário</h2>
-      <form method="POST">
+      <form method="POST" class="container mt-5">
+
         {% csrf_token %}
-        <label class="'form-label ">Nome completo</label>
+        {{ form.non_field_errors }}
+
+        <label class="'form-label">Nome completo</label>
         {{ form.nome }}
-        <label class="form-label ">E-mail</label>
+
+        <label class="'form-label ">E-mail</label>
         {{ form.email }}
-        <label class="form-label ">Senha</label>
+
+        {% if form.email.errors %}
+        <div class="alert alert-danger mt-1 m-0 p-1" role="alert">
+          {{ form.email.errors }}
+        </div>
+        {% endif %}
+
+
+        <label class="'form-label ">Senha</label>
         {{ form.senha }}
-        <div class="row p-3">
+        <div class="row p-3 mt-3">
           <button type="submit" class="btn btn-lg btn-success">Cadastrar</button>
         </div>
       </form>

@@ -15,7 +15,7 @@ nav {
 
 main {
   flex: 1; /* Faz com que o main ocupe o espaço disponível */
-  padding-top: 100px; /* Ajuste esta altura conforme a altura do seu nav */
+  padding-top: 50px; /* Ajuste esta altura conforme a altura do seu nav */
 
 
   
@@ -56,7 +56,7 @@ footer {
 }
 .bg-success {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity)) !important;
+  background-color: rgba(var(--bs-success-rgb), var(--bs-bg-opacity));
 }
 .nav-link {
   border-radius: 5px;
