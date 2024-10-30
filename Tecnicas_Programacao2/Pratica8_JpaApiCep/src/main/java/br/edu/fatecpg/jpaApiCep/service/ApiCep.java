@@ -8,7 +8,7 @@ import java.net.http.HttpResponse;
 
 public class ApiCep {
     //metodo que conseme api para trazer endereco:
-    public String buscarCep(int cep) throws IOException, InterruptedException {
+    public static String buscarCep(int cep) throws IOException, InterruptedException {
         //Cliente ,Request,Response
         HttpClient client = HttpClient.newHttpClient();
 
