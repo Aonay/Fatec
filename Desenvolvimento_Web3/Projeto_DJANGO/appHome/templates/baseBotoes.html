@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block botaoNav %}
+<div class="d-flex gap-2 ms-auto"> 
+  {% if request.session.email %}
+      <a href="{% url 'dashboard' %}">
+          <button id="btnUser" type="button" class="btn btn-lg btn-outline-warning">{{ username }}</button>
+      </a>
+      <a href="{% url 'userLogout' %}">
+          <button id="btnSair" type="button" class="btn btn-lg btn-warning">Sair</button>
+      </a>
+  {% else %}
+      <a href="{% url 'form_login' %}">
+          <button id="btnEntrar" type="button" class="btn btn-lg btn-warning">Entrar</button>
+      </a>
+  {% endif %}
+</div>
+{% endblock %}

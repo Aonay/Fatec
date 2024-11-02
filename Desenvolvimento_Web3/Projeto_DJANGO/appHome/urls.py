@@ -9,5 +9,8 @@ urlpatterns = [
     path('projetos/', views.lista_projetos, name='lista_projetos'),
     path('login/', views.form_login, name='form_login'),
     path('dashboard/',views.dashboard, name='dashboard'),
-    path('logout/', views.userLogout, name='userLogout')
+    path('logout/', views.userLogout, name='userLogout'),
+    path('excluir/<int:id_usuario>', views.excluirUsuario, name='excluir_usuario'),
+    path('editar/<int:id_usuario>', views.editarUsuario, name='editar_usuario'),
+    
 ]

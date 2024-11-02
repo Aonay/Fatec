@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'baseBotoes.html' %}
 
 {% load static %}
 
@@ -6,13 +6,30 @@
 
 {% block conteudo %}
 
-<h2>Usuarios</h2>
-  <ul>
+<h2>Usuarios Cadastrados</h2>
+<table class="table" style="max-width: 700px;">
+  <thead>
+    <tr>
+      <th scope="col">Nome</th>
+      <th scope="col">Email</th>
+      <th scope="col">Acoes</th>
+    </tr>
+  </thead>
     {% for usuario in usuarios %}
-      <p> {{ usuario.nome }} ( {{usuario.email}})</p>
-      {% endfor %}
-  </ul>
+  <tbody>
+    <tr>
+      <td>{{ usuario.nome }}</td>
+      <td>{{ usuario.email }}</td>
+      <td>
+        <a href="{% url 'editar_usuario' usuario.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
+        <a href="{% url 'excluir_usuario' usuario.id %}"><button type="button" class="btn btn-danger">Excluir</button></a> 
+      </td>
+    </tr>
+  </tbody>
+  {% endfor %}
+</table>
 
-  <a href="{% url 'criar_usuario' %}">Cadastrar novo Usuario</a>
+
+<a href="{% url 'criar_usuario' %}">Cadastrar novo Usuario</a>
 
 {% endblock %}

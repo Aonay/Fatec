@@ -9,7 +9,14 @@ from django.contrib.auth import logout
 
 	
 def appHome(request):
-	return render(request,'home.html', {'messages': messages.get_messages(request),'exibir_mensagens':True})
+	email = request.session.get('email')
+	context = {
+		'username':email,
+		'messages': messages.get_messages(request),
+		'exibir_mensagens':True
+		
+	}
+	return render(request,'home.html',context)
 
 
 def criar_usuario(request):
@@ -28,11 +35,17 @@ def criar_usuario(request):
 
 
 def lista_usuarios(request):
+	email = request.session.get('email')
 	usuarios = Usuario.objects.all().values()
-	return render(request,'lista_usuarios.html',{'usuarios':usuarios})
+	context = {
+		'username':email,
+		'usuarios':usuarios
+	}
+	return render(request,'lista_usuarios.html',context)
 
 
 def criar_projeto(request):
+	email = request.session.get('email')
 	if request.method == 'POST':
 		form = ProjetoForm(request.POST or None)
 		if form.is_valid():
@@ -41,17 +54,29 @@ def criar_projeto(request):
 			return redirect('appHome')
 	else:
 		form = ProjetoForm()
-	return render(request,'criar_projeto.html',{'form':form})
+
+	context ={
+		'form':form,
+		'username':email
+	}
+	return render(request,'criar_projeto.html',context)
 
 
 def lista_projetos(request):
+	email = request.session.get('email')
 	projetos = Projeto.objects.all().values()
-	return render(request,'lista_projetos.html',{'projetos':projetos})
+
+	context ={
+		'projetos':projetos,
+		'username':email
+	}
+
+	return render(request,'lista_projetos.html',context)
 
 
 def form_login(request):
 	formLogin = FormLogin(request.POST or None)
-
+	
 	if request.POST:
 		_email = request.POST['email']
 		_senha = request.POST['senha']
@@ -62,9 +87,11 @@ def form_login(request):
 
 			if check_password(_senha,usuario.senha):
 				#sessao
-				request.session.set_expiry(timedelta(seconds=20))
+				request.session.set_expiry(timedelta(seconds=60))
 				#variaveis de sesao
 				request.session['email'] = _email
+				request.session['nome'] = usuario.nome
+				
 				return redirect('dashboard')
 	
 			else:
@@ -83,12 +110,15 @@ def form_login(request):
 
 def dashboard(request):
 	if 'email' not in request.session:
+		messages.info(request,'A sessao expirou')
 		return redirect('appHome')
 	
 	email = request.session.get('email')
+	nome = request.session.get('nome')
 
 	context = {
-		'username':email
+		'username':email,
+		'nome':nome
 	}
 	return render(request,'dashboard.html',context)
 
@@ -97,3 +127,26 @@ def userLogout(request):
 	logout(request)
 	messages.success(request, 'A sessao foi encerrada!')
 	return redirect('appHome')
+
+def excluirUsuario(request, id_usuario):
+	usuario = Usuario.objects.get(id=id_usuario)
+	usuario.delete()
+	return redirect('lista_usuarios')
+
+def editarUsuario(request, id_usuario):
+	usuario = Usuario.objects.get(id=id_usuario)
+	form = UsuarioForm(request.POST or None, instance=usuario)
+	if request.POST:
+		if form.is_valid():
+			user = form.save(commit=False)
+			user.senha = make_password(form.cleaned_data['senha'])
+			user.save()
+			messages.success(request, "Usuario cadastrado com sucesso!")
+			return redirect('appHome')
+	context = {
+		'form':form
+	}
+	return render(request,'editar_usuario.html', context)
+
+
+
