@@ -1,6 +1,6 @@
 from datetime import timedelta
 from django.shortcuts import render, redirect
-from .forms import UsuarioForm,ProjetoForm, FormLogin
+from .forms import UsuarioForm,ProjetoForm, FormLogin,RedefinirSenhaForm
 from .models import Usuario,Projeto
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password,check_password
@@ -27,7 +27,6 @@ def criar_usuario(request):
 			usuario.senha = make_password(form.cleaned_data['senha'])
 			usuario.save()
 			messages.success(request, "Usuario cadastrado com sucesso!")
-			
 			return redirect('appHome')
 	else:
 		form = UsuarioForm()
@@ -87,7 +86,7 @@ def form_login(request):
 
 			if check_password(_senha,usuario.senha):
 				#sessao
-				request.session.set_expiry(timedelta(seconds=60))
+				request.session.set_expiry(timedelta(minutes=30))
 				#variaveis de sesao
 				request.session['email'] = _email
 				request.session['nome'] = usuario.nome
@@ -148,5 +147,49 @@ def editarUsuario(request, id_usuario):
 	}
 	return render(request,'editar_usuario.html', context)
 
+def redefinir_senha(request):
+	if 'email' not in request.session:
+		messages.info(request,'Voce precisa estar logado para alterar sua senha')
+		return redirect('form_login')
+	
+	_email = request.session.get('email')
+	usuario = Usuario.objects.get(email=_email)
+	
+	if request.method == 'POST':
+		form = RedefinirSenhaForm(request.POST or None)
+		
+
+		if form.is_valid():
+			senha_atual = form.cleaned_data['senha_atual']
+			nova_senha = form.cleaned_data['nova_senha']
+			confirmacao_senha = form.cleaned_data['confirmacao_senha']
+
+
+			# Verifica se a senha atual está correta
+			if not check_password(senha_atual, usuario.senha):  # Altere 'request.user.senha' conforme necessário
+					messages.error(request, 'A senha atual está incorreta.')
+					return render(request, 'redefinir_senha.html', {'form': form, 'username': _email})
+
+			# Verifica se a nova senha e a confirmação são iguais
+			if nova_senha != confirmacao_senha:
+					messages.error(request, 'As novas senhas não coincidem.')
+					return render(request, 'redefinir_senha.html', {'form': form, 'username': _email})
+
+			# Atualiza a senha do usuário
+			usuario.senha = make_password(nova_senha)
+			usuario.save()
+			messages.success(request, 'Sua senha foi alterada com sucesso.')
+			return redirect('form_login')  # Redirecione para onde quiser
+
+	else:
+		form = RedefinirSenhaForm()
+
+	return render(request, 'redefinir_senha.html', {'form': form, 'username': _email})
+
+				
+
+
+
+		
 
 

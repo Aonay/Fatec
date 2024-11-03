@@ -1,5 +1,6 @@
 from django import forms
 from .models import Usuario,Projeto
+from django.core.exceptions import ValidationError
 
 
 class UsuarioForm(forms.ModelForm):
@@ -38,3 +39,8 @@ class FormLogin(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email@exemplo.com'}),
             'senha': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite sua senha'}),
         }
+
+class RedefinirSenhaForm(forms.Form):
+    senha_atual = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite sua atual'}))
+    nova_senha = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite a nova senha'}))
+    confirmacao_senha = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'confirme a nova senha'}))
