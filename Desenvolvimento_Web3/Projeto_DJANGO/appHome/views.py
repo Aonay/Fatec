@@ -90,6 +90,7 @@ def form_login(request):
 				#variaveis de sesao
 				request.session['email'] = _email
 				request.session['nome'] = usuario.nome
+				request.session['id']= usuario.id
 				
 				return redirect('dashboard')
 	
@@ -114,10 +115,12 @@ def dashboard(request):
 	
 	email = request.session.get('email')
 	nome = request.session.get('nome')
+	id = request.session.get('id')
 
 	context = {
 		'username':email,
-		'nome':nome
+		'nome':nome,
+		'id':id
 	}
 	return render(request,'dashboard.html',context)
 
@@ -165,26 +168,43 @@ def redefinir_senha(request):
 			confirmacao_senha = form.cleaned_data['confirmacao_senha']
 
 
-			# Verifica se a senha atual está correta
-			if not check_password(senha_atual, usuario.senha):  # Altere 'request.user.senha' conforme necessário
+		
+			if not check_password(senha_atual, usuario.senha):
 					messages.error(request, 'A senha atual está incorreta.')
 					return render(request, 'redefinir_senha.html', {'form': form, 'username': _email})
 
-			# Verifica se a nova senha e a confirmação são iguais
+		
 			if nova_senha != confirmacao_senha:
 					messages.error(request, 'As novas senhas não coincidem.')
 					return render(request, 'redefinir_senha.html', {'form': form, 'username': _email})
 
-			# Atualiza a senha do usuário
+		
 			usuario.senha = make_password(nova_senha)
 			usuario.save()
 			messages.success(request, 'Sua senha foi alterada com sucesso.')
-			return redirect('form_login')  # Redirecione para onde quiser
-
+			return redirect('form_login')
 	else:
 		form = RedefinirSenhaForm()
 
 	return render(request, 'redefinir_senha.html', {'form': form, 'username': _email})
+
+def apagarConta(request):
+	id_usuario = request.session.get('id')
+	if id_usuario:
+		try:
+			usuario = Usuario.objects.get(id=id_usuario)
+			usuario.delete()
+			logout(request)
+			messages.success(request,"Sua conta foi apagada com sucesso!")
+		except Usuario.DoesNotExist:
+			messages.error(request, "Usuario nao econtrado!")
+
+	else:
+		messages.error(request, "Voce precisa estar logado pra excluir sua conta!")
+
+	return redirect('appHome')
+
+
 
 				
 

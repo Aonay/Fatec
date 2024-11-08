@@ -2,29 +2,59 @@
 
 {% load static %}
 
-{% block titulo %} Cadastro {% endblock %}
+{% block titulo %} Meu Dashboard {% endblock %}
+
 
 {% block conteudo %}
 
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body>
-  <h2>Bem vindo <span style="color: blueviolet;">{{ nome }}</span> </h2>
 
-    <div class="container">
-      <a href="{% url 'redefinir_senha' %}"><button type="button" class="btn btn-warning">Redefinir Senha</button></a>
-      <a href=""><button type="button" class="btn btn-danger">Excluir Conta</button></a>
+<body>
+  <h2>Bem vindo <span style="color: blueviolet;">{{ nome }} {{ id }}</span> </h2>
+
+  <div class="container">
+    <a href="{% url 'redefinir_senha' %}"><button type="button" class="btn btn-warning">Redefinir Senha</button></a>
+
+    <!-- Botao que abre o modal de confirmacao de exclusao de conta -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Excluir Conta
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-danger">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">ATENCAO!</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Essa acao nao pode ser desfeita, ao clicar em 'Excluir Conta' voce apagara as sua conta de forma definitiva.</p>
+            <p>O que deseja fazer?</p>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <a href="{% url 'apagar_conta' %}"><button type="button" class="btn btn-danger">Excluir Conta</button></a>
+          </div>
+        </div>
+      </div>
     </div>
 
-  
+  </div>
+
+
   </div>
 </body>
+
 </html>
 
 {% endblock %}

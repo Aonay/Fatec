@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', views.userLogout, name='userLogout'),
     path('excluir/<int:id_usuario>', views.excluirUsuario, name='excluir_usuario'),
     path('editar/<int:id_usuario>', views.editarUsuario, name='editar_usuario'),
-    path('redefinir-senha/', views.redefinir_senha, name='redefinir_senha')
+    path('redefinir-senha/', views.redefinir_senha, name='redefinir_senha'),
+    path('apagar-conta/', views.apagarConta, name='apagar_conta'),
     
 ]
