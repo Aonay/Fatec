@@ -6,11 +6,12 @@ from django.core.exceptions import ValidationError
 class UsuarioForm(forms.ModelForm):
     class Meta: 
         model = Usuario
-        fields = ['nome', 'email', 'senha']
+        fields = ['nome', 'email', 'senha','foto']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'nome completo'}),
             'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email@exemplo.com'}),
             'senha': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite sua senha'}),
+            'foto': forms.FileInput(attrs={'accept': 'image/*','class': 'form-control', 'placeholder': 'selecione'}),
 
         }
     def clean_email(self):
@@ -22,11 +23,12 @@ class UsuarioForm(forms.ModelForm):
 class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
-        fields = ['nome','criador','descricao']
+        fields = ['nome','criador','descricao','capa']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'nome do projeto'}),
             'criador': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do responsavel pelo projeto'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'descreve brevemente o projeto'}),
+            'capa': forms.FileInput(attrs={'accept': 'image/*','class': 'form-control', 'placeholder': 'selecione'}),
             
         }
 
