@@ -1,7 +1,7 @@
 from datetime import timedelta
 from django.shortcuts import render, redirect
-from .forms import UsuarioForm,ProjetoForm, FormLogin,RedefinirSenhaForm
-from .models import Usuario,Projeto
+from .forms import UsuarioForm,ProjetoForm, FormLogin,RedefinirSenhaForm, FotoForm
+from .models import Usuario,Projeto,Foto
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth import logout
@@ -18,7 +18,6 @@ def appHome(request):
 	}
 	return render(request,'home.html',context)
 
-
 def criar_usuario(request):
 	if request.method == 'POST':
 		form = UsuarioForm(request.POST or None)
@@ -32,7 +31,6 @@ def criar_usuario(request):
 		form = UsuarioForm()
 	return render(request,'criar_usuario.html',{'form':form})
 
-
 def lista_usuarios(request):
 	email = request.session.get('email')
 	usuarios = Usuario.objects.all().values()
@@ -41,7 +39,6 @@ def lista_usuarios(request):
 		'usuarios':usuarios
 	}
 	return render(request,'lista_usuarios.html',context)
-
 
 def criar_projeto(request):
 	email = request.session.get('email')
@@ -60,7 +57,6 @@ def criar_projeto(request):
 	}
 	return render(request,'criar_projeto.html',context)
 
-
 def lista_projetos(request):
 	email = request.session.get('email')
 	projetos = Projeto.objects.all().values()
@@ -71,7 +67,6 @@ def lista_projetos(request):
 	}
 
 	return render(request,'lista_projetos.html',context)
-
 
 def form_login(request):
 	formLogin = FormLogin(request.POST or None)
@@ -106,8 +101,6 @@ def form_login(request):
 	}
 	return render (request, 'form-login.html',context)
 
-
-
 def dashboard(request):
 	if 'email' not in request.session:
 		messages.info(request,'A sessao expirou')
@@ -123,7 +116,6 @@ def dashboard(request):
 		'id':id
 	}
 	return render(request,'dashboard.html',context)
-
 
 def userLogout(request):
 	logout(request)
@@ -204,7 +196,26 @@ def apagarConta(request):
 
 	return redirect('appHome')
 
+def criar_foto(request):
+	if request.method == 'POST':
+		form = FotoForm(request.POST, request.FILES)
+		if form.is_valid():
+			form.save()
+			return redirect('galeria')
+	else:
+		form = FotoForm()
+	return render(request,'criar_foto.html',{'form':form})
 
+def ver_galeria(request):
+	email = request.session.get('email')
+	imagens = Foto.objects.all().values()
+
+	context ={
+		'imagens':imagens,
+		'username':email
+	}
+
+	return render(request,'galeria.html',context)
 
 				
 

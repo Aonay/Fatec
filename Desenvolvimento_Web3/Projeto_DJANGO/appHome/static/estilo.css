@@ -91,3 +91,9 @@ footer {
 .form-label {
   margin-bottom: 0.2rem; /* Ajuste o valor conforme necessário */
 }
+
+.custom-image {
+  height: 200px; /* Define uma altura padrão para todas as imagens */
+  object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorcer */
+  width: 100%; /* Assegura que a imagem ocupa toda a largura do card */
+}

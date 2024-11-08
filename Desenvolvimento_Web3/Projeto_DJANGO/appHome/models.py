@@ -13,5 +13,9 @@ class Projeto(models.Model):
   nome = models.CharField(max_length=100)
   criador = models.CharField(max_length=100)
   descricao = models.CharField(max_length=255)
+
+class Foto(models.Model):
+  titulo = models.CharField(max_length=100)
+  imagem = models.ImageField(upload_to='imagens/')
   
 

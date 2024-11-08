@@ -14,5 +14,8 @@ urlpatterns = [
     path('editar/<int:id_usuario>', views.editarUsuario, name='editar_usuario'),
     path('redefinir-senha/', views.redefinir_senha, name='redefinir_senha'),
     path('apagar-conta/', views.apagarConta, name='apagar_conta'),
+    path('subir-foto/', views.criar_foto, name='criar_foto'),
+    path('galeria/', views.ver_galeria, name='galeria'),
+
     
 ]

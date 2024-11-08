@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario,Projeto
+from .models import Usuario,Projeto,Foto
 from django.core.exceptions import ValidationError
 
 
@@ -44,3 +44,13 @@ class RedefinirSenhaForm(forms.Form):
     senha_atual = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite sua atual'}))
     nova_senha = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite a nova senha'}))
     confirmacao_senha = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'confirme a nova senha'}))
+
+class FotoForm(forms.ModelForm):
+    class Meta:
+        model = Foto
+        fields = ['titulo','imagem']
+
+        widgets = {
+            'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite um titulo para imagem'}),
+            'imagem': forms.FileInput(attrs={'accept': 'image/*','class': 'form-control', 'placeholder': 'selecione'}),
+        }
