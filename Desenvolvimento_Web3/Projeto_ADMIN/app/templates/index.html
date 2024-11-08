@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protutos</title>
+</head>
+
+<body>
+    <h1>Nome Produto</h1>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Cadastrar">
+
+    </form>
+
+
+
+    <h1>Produtos</h1>
+    {% if produtos %}
+    {% for produto in produtos %}
+
+    <p>{{produto.nome}} // {{produto.categoria}} // {{produto.preco}} </p>
+
+
+    {% endfor %}
+    {% endif %}
+
+
+
+</body>
+
+</html>
