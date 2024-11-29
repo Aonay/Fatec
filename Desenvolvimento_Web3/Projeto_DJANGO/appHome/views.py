@@ -213,6 +213,7 @@ def apagarConta(request):
 			usuario.delete()
 			logout(request)
 			messages.success(request,"Sua conta foi apagada com sucesso!")
+			return redirect('appHome')
 		except Usuario.DoesNotExist:
 			messages.error(request, "Usuario nao econtrado!")
 
