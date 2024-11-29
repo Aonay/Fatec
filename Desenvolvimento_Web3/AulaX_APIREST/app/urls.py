@@ -7,5 +7,6 @@ urlpatterns = [
     path('produtos/',views.getProdutos, name='getProdutos'),
     path('produtos/<int:id_produto>',views.getProdutoID, name='getProdutoID'),
     path('api/',views.getAPI,name='getAPI'),
+    path('grafico/',views.grafico, name='grafico'),
 
 ]
