@@ -15,7 +15,7 @@ nav {
 
 main {
   flex: 1; /* Faz com que o main ocupe o espaço disponível */
-  padding-top: 50px; /* Ajuste esta altura conforme a altura do seu nav */
+  padding-top: 20px; /* Ajuste esta altura conforme a altura do seu nav */
 
 
   
@@ -96,4 +96,19 @@ footer {
   height: 200px; /* Define uma altura padrão para todas as imagens */
   object-fit: cover; /* Ajusta a imagem para preencher o espaço sem distorcer */
   width: 100%; /* Assegura que a imagem ocupa toda a largura do card */
+}
+.responsive-text {
+  font-size: 5vw; /* Tamanho base para telas pequenas */
+}
+
+@media (min-width: 768px) {
+  .responsive-text {
+      font-size: 2.5vw; /* Ajusta para telas médias */
+  }
+}
+
+@media (min-width: 1200px) {
+  .responsive-text {
+      font-size: 1.5vw; /* Ajusta para telas grandes */
+  }
 }

@@ -1,6 +1,7 @@
 from django import forms
-from .models import Usuario,Projeto,Foto
+from .models import Usuario,Projeto,Foto,Contato
 from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
 
 
 class UsuarioForm(forms.ModelForm):
@@ -19,6 +20,18 @@ class UsuarioForm(forms.ModelForm):
         if Usuario.objects.filter(email=email).exists():
             raise forms.ValidationError("Este e-mail já está cadastrado.")
         return email
+    
+class UsuarioEditForm(forms.ModelForm):
+    class Meta: 
+        model = Usuario
+        fields = ['nome', 'email', 'senha','foto']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'nome completo'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email@exemplo.com'}),
+            'senha': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'digite sua senha'}),
+            'foto': forms.FileInput(attrs={'accept': 'image/*','class': 'form-control', 'placeholder': 'selecione'}),
+
+        }
     
 class ProjetoForm(forms.ModelForm):
     class Meta:
@@ -56,3 +69,20 @@ class FotoForm(forms.ModelForm):
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Digite um titulo para imagem'}),
             'imagem': forms.FileInput(attrs={'accept': 'image/*','class': 'form-control', 'placeholder': 'selecione'}),
         }
+
+class ContatoForm(forms.ModelForm):
+    class Meta: 
+        model = Contato
+        fields = ['nome', 'email', 'telefone','mensagem']
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'nome completo'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'email@exemplo.com'}),
+            'telefone': forms.NumberInput(attrs={'class': 'form-control',
+            'max': 999999999999999,  # Limita o número máximo a 15 dígitos
+            'min': 0,  # Limita o número mínimo
+            'placeholder': 'Digite o telefone com DDD sem espacos',
+            'maxlength': '15'  # Limita a 15 caracteres
+        }),
+            'mensagem': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Digite sua mensagem', 'rows': 4,})
+        }
+    

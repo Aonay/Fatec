@@ -1,6 +1,6 @@
 from datetime import timedelta
 from django.shortcuts import render, redirect
-from .forms import UsuarioForm,ProjetoForm, FormLogin,RedefinirSenhaForm, FotoForm
+from .forms import UsuarioForm,ProjetoForm, FormLogin,RedefinirSenhaForm, FotoForm,UsuarioEditForm,ContatoForm
 from .models import Usuario,Projeto,Foto
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password,check_password
@@ -20,7 +20,7 @@ def appHome(request):
 
 def criar_usuario(request):
 	if request.method == 'POST':
-		form = UsuarioForm(request.POST or None)
+		form = UsuarioForm(request.POST or None,request.FILES)
 		if form.is_valid():
 			usuario = form.save(commit=False)
 			usuario.senha = make_password(form.cleaned_data['senha'])
@@ -34,16 +34,20 @@ def criar_usuario(request):
 def lista_usuarios(request):
 	email = request.session.get('email')
 	usuarios = Usuario.objects.all().values()
+	projetos = Projeto.objects.all().values()
 	context = {
 		'username':email,
-		'usuarios':usuarios
+		'usuarios':usuarios,
+		'projetos':projetos,
+		'messages': messages.get_messages(request),
+		'exibir_mensagens':True
 	}
 	return render(request,'lista_usuarios.html',context)
 
 def criar_projeto(request):
 	email = request.session.get('email')
 	if request.method == 'POST':
-		form = ProjetoForm(request.POST or None)
+		form = ProjetoForm(request.POST or None,request.FILES)
 		if form.is_valid():
 			form.save()
 			messages.success(request, "Projeto cadastrado com sucesso!")
@@ -110,7 +114,10 @@ def dashboard(request):
 	nome = request.session.get('nome')
 	id = request.session.get('id')
 
+	usuario = Usuario.objects.get(id=id)
+	imagem = usuario.foto
 	context = {
+		'imagem':imagem,
 		'username':email,
 		'nome':nome,
 		'id':id
@@ -129,18 +136,36 @@ def excluirUsuario(request, id_usuario):
 
 def editarUsuario(request, id_usuario):
 	usuario = Usuario.objects.get(id=id_usuario)
-	form = UsuarioForm(request.POST or None, instance=usuario)
+	form = UsuarioEditForm(request.POST or None, instance=usuario)
 	if request.POST:
 		if form.is_valid():
 			user = form.save(commit=False)
 			user.senha = make_password(form.cleaned_data['senha'])
 			user.save()
-			messages.success(request, "Usuario cadastrado com sucesso!")
-			return redirect('appHome')
+			messages.success(request, "Usuario editado com sucesso!")
+			return redirect('lista_usuarios')
 	context = {
 		'form':form
 	}
 	return render(request,'editar_usuario.html', context)
+
+def excluirProjeto(request, id_projeto):
+	projeto = Projeto.objects.get(id=id_projeto)
+	projeto.delete()
+	return redirect('lista_usuarios')
+
+def editarProjeto(request, id_projeto):
+	projeto = Projeto.objects.get(id=id_projeto)
+	form = ProjetoForm(request.POST or None, instance=projeto)
+	if request.POST:
+		if form.is_valid():
+			form.save()
+			messages.success(request, "Projeto Atualizado com sucesso!")
+			return redirect('lista_usuarios')
+	context = {
+		'form':form
+	}
+	return render(request,'editar_projeto.html', context)
 
 def redefinir_senha(request):
 	if 'email' not in request.session:
@@ -209,13 +234,36 @@ def criar_foto(request):
 def ver_galeria(request):
 	email = request.session.get('email')
 	imagens = Foto.objects.all().values()
+	fotos = Usuario.objects.all().values()
+	capas = Projeto.objects.all().values()
 
 	context ={
 		'imagens':imagens,
+		'fotos':fotos,
+		'capas':capas,
 		'username':email
 	}
 
 	return render(request,'galeria.html',context)
+
+def contato(request):
+	email = request.session.get('email')
+	if request.method == 'POST':
+		form = ContatoForm(request.POST or None)
+		if form.is_valid():
+			form.save()
+			messages.success(request, "Sua mensagem foi enviada, retornarermos no email fornecido assim que possivel")
+			return redirect('appHome')
+	else:
+		form = ContatoForm()
+
+	context ={
+		'form':form,
+		'username':email
+	}
+	return render(request,'contato.html',context)
+	
+
 
 				
 

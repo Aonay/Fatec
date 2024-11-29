@@ -30,8 +30,8 @@
         <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
           <li><a href="{% url 'appHome' %}" class="nav-link px-2 link-light">Inicio</a></li>
           <li><a href="{% url 'lista_projetos' %}" class="nav-link px-2 link-light">Projetos</a></li>
-          <li><a href="#" class="nav-link px-2 link-light">Sobre</a></li>
-          <li><a href="#" class="nav-link px-2 link-light">Contato</a></li>
+          <li><a href="{% url 'galeria' %}" class="nav-link px-2 link-light">Galeria</a></li>
+          <li><a href="{% url 'contato' %}" class="nav-link px-2 link-light">Contato</a></li>
         </ul>
 
         <!-- Botão Nav com Bloco -->
@@ -65,7 +65,7 @@
 
 
 
-  <main class="container mt-0">
+  <main class="mt-0">
     {% block conteudo %}
 
     {% endblock %}
@@ -75,9 +75,9 @@
     <div class="container">
       <div class="container">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="{% url 'lista_usuarios' %}" class="nav-link px-2 text-muted link-light">Usuarios</a></li>
+          <li class="nav-item"><a href="{% url 'lista_usuarios' %}" class="nav-link px-2 text-muted link-light">Admin</a></li>
           <li class="nav-item"><a href="{% url 'criar_projeto' %}" class="nav-link px-2 text-muted link-light">Cadastrar Projeto</a></li>
-          <li class="nav-item"><a href="{% url 'criar_foto' %}" class="nav-link px-2 text-muted link-light">Upload</a></li>
+          <li class="nav-item"><a href="{% url 'criar_foto' %}" class="nav-link px-2 text-muted link-light">Adicionar Foto</a></li>
           <li class="nav-item"><a href="{% url 'galeria' %}" class="nav-link px-2 text-muted link-light">Galeria</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted link-light">Sobre nós</a></li>
         </ul>

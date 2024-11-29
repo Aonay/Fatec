@@ -10,7 +10,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6  border border-warning rounded p-3" style="max-width: 500px;">
       <h2>Cadastrar novo Usuário</h2>
-      <form method="POST" class="container mt-5">
+      <form method="POST" enctype="multipart/form-data" class="container mt-5">
 
         {% csrf_token %}
         {{ form.non_field_errors }}
@@ -30,6 +30,11 @@
 
         <label class="'form-label ">Senha</label>
         {{ form.senha }}
+
+        <label class="'form-label ">Foto</label>
+        {{ form.foto }}
+
+
         <div class="row p-3 mt-3">
           <button type="submit" class="btn btn-lg btn-success">Cadastrar</button>
         </div>

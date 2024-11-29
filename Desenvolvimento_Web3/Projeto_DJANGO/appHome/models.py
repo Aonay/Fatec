@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 
 # Create your models here.
 class Usuario(models.Model):
@@ -19,5 +20,11 @@ class Projeto(models.Model):
 class Foto(models.Model):
   titulo = models.CharField(max_length=100)
   imagem = models.ImageField(upload_to='imagens/')
+
+class Contato(models.Model):
+  nome = models.CharField(max_length=255)
+  email = models.EmailField()
+  telefone = models.CharField(max_length=15)
+  mensagem = models.TextField(max_length=1000)
   
 

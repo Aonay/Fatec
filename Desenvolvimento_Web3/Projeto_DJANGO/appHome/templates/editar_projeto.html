@@ -1,0 +1,39 @@
+{% extends 'baseBotoes.html' %}
+
+{% load static %}
+
+{% block titulo %} Editar Projeto {% endblock %}
+
+{% block conteudo %}
+
+<div class="container ">
+  <div class="row justify-content-center">
+    <div class="col-md-6  border border-warning rounded p-3">
+      <h2>Editar Projeto</h2>
+      <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <label class="'form-label ">Nome do Projeto</label>
+        {{ form.nome }}
+
+        <label class="form-label ">Criador</label>
+        {{ form.criador }}
+
+        <label class="form-label ">Descrição</label>
+        {{ form.descricao }}
+
+        <label class="'form-label ">Capa</label>
+        {{ form.capa }}
+
+        <div class="row p-3">
+          <button type="submit" class="btn btn-lg btn-success">Atualizar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

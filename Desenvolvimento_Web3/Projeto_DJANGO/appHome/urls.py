@@ -10,12 +10,15 @@ urlpatterns = [
     path('login/', views.form_login, name='form_login'),
     path('dashboard/',views.dashboard, name='dashboard'),
     path('logout/', views.userLogout, name='userLogout'),
-    path('excluir/<int:id_usuario>', views.excluirUsuario, name='excluir_usuario'),
-    path('editar/<int:id_usuario>', views.editarUsuario, name='editar_usuario'),
+    path('excluirUsuario/<int:id_usuario>', views.excluirUsuario, name='excluir_usuario'),
+    path('editarUsuario/<int:id_usuario>', views.editarUsuario, name='editar_usuario'),
+    path('excluirProjeto/<int:id_projeto>', views.excluirProjeto, name='excluir_projeto'),
+    path('editarProjeto/<int:id_projeto>', views.editarProjeto, name='editar_projeto'),
     path('redefinir-senha/', views.redefinir_senha, name='redefinir_senha'),
     path('apagar-conta/', views.apagarConta, name='apagar_conta'),
     path('subir-foto/', views.criar_foto, name='criar_foto'),
     path('galeria/', views.ver_galeria, name='galeria'),
+    path('contato/', views.contato, name='contato'),
 
     
 ]

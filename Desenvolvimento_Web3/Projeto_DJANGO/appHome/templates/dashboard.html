@@ -4,57 +4,55 @@
 
 {% block titulo %} Meu Dashboard {% endblock %}
 
-
 {% block conteudo %}
+<div class="row m-2 text-center">
+  <!-- Coluna lateral esquerda -->
+  <div class="col-12 col-md-2 bg-warning rounded-start p-3 d-flex flex-column align-items-center">
+    <div class="p-1">
+      <img src="/media/{{imagem}}" alt="foto" class="img-fluid rounded-circle shadow p-1 bg-dark"
+        style="width: 100%; max-width: 250px; aspect-ratio: 1 / 1; object-fit: cover;">
+    </div>
+    <h1 class="p-2 responsive-text">Bem vindo <br>
+      <span style="color: rgb(0, 0, 0);">{{ nome }}</span>
+    </h1>
+    <div class="container mt-5 d-flex flex-wrap justify-content-center gap-2">
+      <a href="{% url 'redefinir_senha' %}">
+        <button type="button" class="btn btn-success">Alterar Senha</button>
+      </a>
+      <!-- Botão para abrir o modal -->
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Excluir Conta
+      </button>
+    </div>
+  </div>
 
-
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-
-<body>
-  <h2>Bem vindo <span style="color: blueviolet;">{{ nome }} {{ id }}</span> </h2>
-
-  <div class="container">
-    <a href="{% url 'redefinir_senha' %}"><button type="button" class="btn btn-warning">Redefinir Senha</button></a>
-
-    <!-- Botao que abre o modal de confirmacao de exclusao de conta -->
-    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Excluir Conta
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header bg-danger">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">ATENCAO!</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p>Essa acao nao pode ser desfeita, ao clicar em 'Excluir Conta' voce apagara as sua conta de forma definitiva.</p>
-            <p>O que deseja fazer?</p>
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <a href="{% url 'apagar_conta' %}"><button type="button" class="btn btn-danger">Excluir Conta</button></a>
-          </div>
+  <!-- Modal de exclusão -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">ATENÇÃO!</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Essa ação não pode ser desfeita. Ao clicar em 'Excluir Conta', você apagará sua conta de forma definitiva.</p>
+          <p>O que deseja fazer?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <a href="{% url 'apagar_conta' %}"><button type="button" class="btn btn-danger">Excluir Conta</button></a>
         </div>
       </div>
     </div>
-
   </div>
 
-
+  <!-- Imagem principal -->
+  <div class="col-12 col-md-8">
+    <img src="/media/imagens/ecologia3.jpg" alt="Ecologia" class="img-fluid rounded shadow"
+      style="max-width: 100%; object-fit: cover;">
   </div>
-</body>
 
-</html>
-
+  <!-- Coluna lateral direita -->
+  <div class="col-12 col-md-2 bg-success rounded-end p-3"></div>
+</div>
 {% endblock %}

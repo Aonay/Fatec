@@ -6,30 +6,72 @@
 
 {% block conteudo %}
 
-<h2>Usuarios Cadastrados</h2>
-<table class="table" style="max-width: 700px;">
-  <thead>
-    <tr>
-      <th scope="col">Nome</th>
-      <th scope="col">Email</th>
-      <th scope="col">Acoes</th>
-    </tr>
-  </thead>
-    {% for usuario in usuarios %}
-  <tbody>
-    <tr>
-      <td>{{ usuario.nome }}</td>
-      <td>{{ usuario.email }}</td>
-      <td>
-        <a href="{% url 'editar_usuario' usuario.id %}"><button type="button" class="btn btn-warning">Editar</button></a>
-        <a href="{% url 'excluir_usuario' usuario.id %}"><button type="button" class="btn btn-danger">Excluir</button></a> 
-      </td>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
+<div class="container text-center bg-warning rounded pb-1" style="max-width: 60%;">
+  <h2>Usuarios Cadastrados</h2>
+  <table class="table table-dark table-striped" style="max-width: 100%;">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Imagem</th>
+        <th scope="col">Acoes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for usuario in usuarios %}
+      <tr class="align-middle">
+        <td>{{ usuario.nome }}</td>
+        <td>{{ usuario.email }}</td>
+        <td> <img src="/media/{{usuario.foto}}" class="rounded"
+            style="width: 100%; max-width: 90px; aspect-ratio: 1 / 1; object-fit: cover;" alt="foto"></td>
 
 
-<a href="{% url 'criar_usuario' %}">Cadastrar novo Usuario</a>
+        <td>
+          <a href="{% url 'editar_usuario' usuario.id %}"><button type="button"
+              class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'excluir_usuario' usuario.id %}"><button type="button"
+              class="btn btn-danger">Excluir</button></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+</div>
+
+<div class="container text-center my-5 bg-warning rounded pb-1" style="max-width: 60%;">
+  <h2>Projetos Cadastrados</h2>
+  <table class="table table-dark table-striped" style="max-width: 100%;">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Criador</th>
+        <th scope="col">Imagem</th>
+        <th scope="col">Acoes</th>
+      </tr>
+    </thead>
+   
+    <tbody>
+      {% for projeto in projetos %}
+      <tr class="align-middle">
+        <td>{{ projeto.nome }}</td>
+        <td>{{ projeto.criador }}</td>
+        <td> <img src="/media/{{projeto.capa}}" class="rounded"
+            style="width: 100%; max-width: 90px; aspect-ratio: 1 / 1; object-fit: cover;" alt="capa"></td>
+        <td>
+          <a href="{% url 'editar_projeto' projeto.id %}"><button type="button"
+              class="btn btn-warning">Editar</button></a>
+          <a href="{% url 'excluir_projeto' projeto.id %}"><button type="button"
+              class="btn btn-danger">Excluir</button></a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    
+  </table>
+</div>
+
+
+
 
 {% endblock %}
