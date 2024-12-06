@@ -78,6 +78,8 @@ def lista_projetos(request):
 
 	context ={
 		'projetos':projetos,
+		'messages': messages.get_messages(request),
+		'exibir_mensagens':True,
 		'username':email
 	}
 
@@ -313,7 +315,7 @@ def finalizarCompra(request):
 			idCurso = id_projeto,
 			curso = curso.nome,
 			valorPago = curso.valor,
-			dtCompra= mes_posterior
+			dtCompra= hoje
 		)
 		venda.save()
 		messages.success(request,'Compra realizada com sucesso!')

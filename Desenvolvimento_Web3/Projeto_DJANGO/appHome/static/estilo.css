@@ -2,6 +2,10 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Garante que a altura mínima da página seja 100% da altura da janela */
+  background-image: url('images/bgpage.jpg');
+  background-size: cover; /* Ajusta a imagem para cobrir todo o body */
+  background-repeat: no-repeat; /* Evita repetição da imagem */
+  background-position: center; /* Centraliza a imagem */
   
 }
 

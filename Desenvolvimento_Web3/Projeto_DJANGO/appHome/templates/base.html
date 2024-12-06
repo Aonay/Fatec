@@ -15,35 +15,35 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
-<body>
-  <nav class="bg-dark">
-    <div class="container-fluid">
-      <header class="d-flex flex-wrap align-items-center justify-content-between py-1">
+<body >
+  <nav class=" bg-dark">
+  <div class="container-fluid">
+    <header class="d-flex flex-wrap align-items-center justify-content-between py-1">
 
-        <!-- Logo e Título -->
-        <div class="d-flex align-items-center">
-          <img id="logo" class="d-flex align-items-center me-2" src="{% static 'images/logo2.png' %}" alt="logo">
-          <span id="ecoacao" class="text-light">ECOAÇÃO</span>
-        </div>
+      <!-- Logo e Título -->
+      <div class="d-flex align-items-center">
+        <img id="logo" class="d-flex align-items-center me-2" src="{% static 'images/logo2.png' %}" alt="logo">
+        <span id="ecoacao" class="text-light">ECOAÇÃO</span>
+      </div>
 
-        <!-- Menu de Navegação -->
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="{% url 'appHome' %}" class="nav-link px-2 link-light">Inicio</a></li>
-          <li><a href="{% url 'lista_projetos' %}" class="nav-link px-2 link-light">Projetos</a></li>
-          <li><a href="{% url 'galeria' %}" class="nav-link px-2 link-light">Galeria</a></li>
-          <li><a href="{% url 'contato' %}" class="nav-link px-2 link-light">Contato</a></li>
-        </ul>
+      <!-- Menu de Navegação -->
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="{% url 'appHome' %}" class="nav-link px-2 link-light">Inicio</a></li>
+        <li><a href="{% url 'lista_projetos' %}" class="nav-link px-2 link-light">Projetos</a></li>
+        <li><a href="{% url 'galeria' %}" class="nav-link px-2 link-light">Galeria</a></li>
+        <li><a href="{% url 'contato' %}" class="nav-link px-2 link-light">Contato</a></li>
+      </ul>
 
-        <!-- Botão Nav com Bloco -->
-        <div class="text-end d-grid gap-2">
-          {% block botaoNav %}
-          {% endblock %}
+      <!-- Botão Nav com Bloco -->
+      <div class="text-end d-grid gap-2">
+        {% block botaoNav %}
+        {% endblock %}
 
-        </div>
-      </header>
-    </div>
+      </div>
+    </header>
+  </div>
   </nav>
-  </main>
+
 
 
   <div style="margin-top: 60px;">
@@ -75,11 +75,18 @@
     <div class="container">
       <div class="container">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          <li class="nav-item"><a href="{% url 'lista_usuarios' %}" class="nav-link px-2 text-muted link-light">Admin</a></li>
-          <li class="nav-item"><a href="{% url 'criar_projeto' %}" class="nav-link px-2 text-muted link-light">AddCursos</a></li>
-          <li class="nav-item"><a href="{% url 'lista_projetos' %}" class="nav-link px-2 text-muted link-light">Cursos</a></li> 
-          <li class="nav-item"><a href="{% url 'criar_foto' %}" class="nav-link px-2 text-muted link-light">Adicionar Foto</a></li>
-          <li class="nav-item"><a href="{% url 'galeria' %}" class="nav-link px-2 text-muted link-light">Galeria</a></li>
+          <li class="nav-item"><a href="{% url 'lista_usuarios' %}"
+              class="nav-link px-2 text-muted link-light">Admin</a></li>
+          <li class="nav-item"><a href="{% url 'criar_projeto' %}"
+              class="nav-link px-2 text-muted link-light">AddCursos</a></li>
+          <li class="nav-item"><a href="{% url 'lista_projetos' %}"
+              class="nav-link px-2 text-muted link-light">Cursos</a></li>
+          <li class="nav-item"><a href="{% url 'criar_foto' %}" class="nav-link px-2 text-muted link-light">Adicionar
+              Foto</a></li>
+          <li class="nav-item"><a href="{% url 'galeria' %}" class="nav-link px-2 text-muted link-light">Galeria</a>
+          </li>
+          <li class="nav-item"><a href="{% url 'grafico' %}" class="nav-link px-2 text-muted link-light">Graficos</a>
+          </li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted link-light">Sobre nós</a></li>
         </ul>
       </div>
