@@ -19,6 +19,9 @@ urlpatterns = [
     path('subir-foto/', views.criar_foto, name='criar_foto'),
     path('galeria/', views.ver_galeria, name='galeria'),
     path('contato/', views.contato, name='contato'),
+    path('confirmar/<int:id_projeto>', views.confirmarCompra, name='confirmar_compra'),
+    path('compra/', views.finalizarCompra, name='finalizar_compra'),
+    path('grafico/', views.grafico, name='grafico'),
 
     
 ]

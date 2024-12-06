@@ -1,0 +1,23 @@
+{% extends 'baseBotoes.html' %}
+
+{% load static %}
+
+{% block titulo %} Contato {% endblock %}
+
+{% block conteudo %}
+
+
+  <div class="container">
+    <h2>Confirmação de Compra</h2>
+    <p><strong>Curso:</strong> {{ curso.nome }}</p>
+    <p><strong>Valor:</strong> R$ {{ curso.valor }}</p>
+    <form method="POST" action="{% url 'finalizar_compra' %}">
+        {% csrf_token %}
+        <input type="hidden" name="id_usuario" value="{{ id_usuario }}">
+        <input type="hidden" name="id_projeto" value="{{ id_projeto }}">
+        <button type="submit" class="btn btn-success">Confirmar</button>
+        <a href="{% url 'lista_projetos' %}" class="btn btn-danger">Cancelar</a>
+    </form>
+  </div>
+
+{% endblock %}

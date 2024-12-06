@@ -1,10 +1,21 @@
 from datetime import timedelta
 from django.shortcuts import render, redirect
 from .forms import UsuarioForm,ProjetoForm, FormLogin,RedefinirSenhaForm, FotoForm,UsuarioEditForm,ContatoForm
-from .models import Usuario,Projeto,Foto
+from .models import Usuario,Projeto,Foto,Vendas
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password,check_password
 from django.contrib.auth import logout
+from django.utils.timezone import now
+import io
+import urllib, base64
+import matplotlib.pyplot as plt
+from django.db.models import Sum
+from django.db.models.functions import TruncMonth
+from datetime import datetime
+import textwrap
+import calendar
+import locale
+from dateutil.relativedelta import relativedelta
 
 
 	
@@ -263,7 +274,127 @@ def contato(request):
 		'username':email
 	}
 	return render(request,'contato.html',context)
+
+def confirmarCompra(request,id_projeto):
+	if 'email' not in request.session:
+		messages.info(request,'E necessario estar logado')
+		return redirect('form_login')
 	
+	curso = Projeto.objects.get(id=id_projeto)
+	 
+	context = {
+		'curso': curso,
+		'id_projeto':curso.id
+	}
+	return render(request, 'confirmar_compra.html',context)
+
+def finalizarCompra(request):
+	if 'email' not in request.session:
+		messages.info(request,'E necessario estar logado para comprar')
+		return redirect('form_login')
+	if request.method == 'POST':
+		id_usuario = request.session.get('id')
+		id_projeto = request.POST.get('id_projeto')
+		curso = Projeto.objects.get(id=id_projeto)
+
+		if curso.vagas <= 0:
+			messages.error(request, 'Não há mais vagas disponíveis para este curso.')
+			return redirect('lista_projetos')
+		
+		curso.vagas -= 1  
+		curso.save() 
+		
+		hoje = datetime.now().date()
+		mes_anterior = hoje - relativedelta(months=1)
+		mes_posterior = hoje + relativedelta(months=1) 
+
+		venda = Vendas(
+			idUsuario = id_usuario,
+			idCurso = id_projeto,
+			curso = curso.nome,
+			valorPago = curso.valor,
+			dtCompra= mes_posterior
+		)
+		venda.save()
+		messages.success(request,'Compra realizada com sucesso!')
+		return redirect('lista_projetos')
+	
+	return redirect('lista_projetos')
+
+def grafico(request):
+	# Configurar o locale para Português do Brasil
+	locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
+
+	# 1. Dados gerais: vendas totais por curso
+	vendas_totais = Vendas.objects.values('curso').annotate(valor_total=Sum('valorPago'))
+	cursos = [venda['curso'] for venda in vendas_totais]
+	precos = [venda['valor_total'] for venda in vendas_totais]
+
+	# Ajuste de texto para cursos com nomes longos
+	cursos = [textwrap.fill(curso, width=15) for curso in cursos]
+
+	# Criar o gráfico geral
+	fig1, xy1 = plt.subplots()
+	xy1.bar(cursos, precos, color='skyblue')
+	xy1.set_xlabel('Cursos')
+	xy1.set_ylabel('Valor Total')
+	xy1.set_title('Vendas Totais por Curso')
+	xy1.tick_params(axis='x', rotation=45)  # Girar os rótulos do eixo X
+	plt.tight_layout()  # Garante que os rótulos não sejam cortados
+
+	# Salvar o gráfico em memória
+	buf1 = io.BytesIO()
+	plt.savefig(buf1, format='png')
+	buf1.seek(0)
+	string1 = base64.b64encode(buf1.read()).decode('utf-8')
+	grafico_geral = 'data:image/png;base64,' + string1
+
+	# 2. Dados detalhados: vendas mensais
+	vendas_mensais = (
+			Vendas.objects.annotate(mes=TruncMonth('dtCompra'))
+			.values('mes', 'curso')
+			.annotate(valor_total=Sum('valorPago'))
+			.order_by('mes')
+	)
+
+	# Preparar os dados para o gráfico
+	meses = sorted(list(set(venda['mes'].month for venda in vendas_mensais)))
+	nomes_meses = [calendar.month_name[mes].capitalize() for mes in meses]  # Nome do mês em português com a primeira letra maiúscula
+	cursos_set = set(venda['curso'] for venda in vendas_mensais)
+	data_por_curso = {curso: [0] * len(meses) for curso in cursos_set}
+
+	for venda in vendas_mensais:
+			curso = venda['curso']
+			mes = venda['mes'].month
+			valor = venda['valor_total']
+			mes_idx = meses.index(mes)
+			data_por_curso[curso][mes_idx] = valor
+
+	# Criar o gráfico individual por mês
+	fig2, xy2 = plt.subplots()
+	for curso, valores in data_por_curso.items():
+			xy2.plot(nomes_meses, valores, marker='o', label=curso)
+
+	xy2.set_xlabel('Meses')
+	xy2.set_ylabel('Valor Total')
+	xy2.set_title('Vendas Mensais por Curso')
+	xy2.legend()
+	xy2.grid()
+
+	# Salvar o gráfico em memória
+	buf2 = io.BytesIO()
+	plt.savefig(buf2, format='png')
+	buf2.seek(0)
+	string2 = base64.b64encode(buf2.read()).decode('utf-8')
+	grafico_individual = 'data:image/png;base64,' + string2
+
+	# Contexto para renderização
+	context = {
+			'grafico_geral': grafico_geral,
+			'grafico_individual': grafico_individual,
+	}
+
+	return render(request, 'grafico.html', context)
 
 
 				

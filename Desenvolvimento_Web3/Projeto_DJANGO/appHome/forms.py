@@ -36,13 +36,14 @@ class UsuarioEditForm(forms.ModelForm):
 class ProjetoForm(forms.ModelForm):
     class Meta:
         model = Projeto
-        fields = ['nome','criador','descricao','capa']
+        fields = ['nome','criador','descricao','capa','valor','vagas']
         widgets = {
             'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'nome do projeto'}),
             'criador': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome do responsavel pelo projeto'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'descreve brevemente o projeto'}),
             'capa': forms.FileInput(attrs={'accept': 'image/*','class': 'form-control', 'placeholder': 'selecione'}),
-            
+            'valor':forms.NumberInput(attrs={'step': '0.01','class': 'form-control','placeholder': 'Valor de venda'}),            
+            'vagas':forms.NumberInput(attrs={'class': 'form-control','placeholder': 'Quantidade de vagas'})            
         }
 
 class FormLogin(forms.ModelForm):

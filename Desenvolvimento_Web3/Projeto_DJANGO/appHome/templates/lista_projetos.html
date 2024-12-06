@@ -11,14 +11,20 @@
     {% for projeto in projetos %}
 
     <div class="col mt-5">
-        <div class="card h-100"> 
+        <div class="card h-100">
             <img src="/media/{{projeto.capa}}" class="card-img-top" alt="capaprojeto">
             <div class="card-body d-flex flex-column">
                 <h4 class="card-title">{{ projeto.nome }}</h4>
-                <h5 class="card-title">Fundador: {{ projeto.criador }}</h5>
+                <h5 class="card-subtitle mb-2 text-muted">Professor: {{ projeto.criador }}</h5>
+                <h5 class="card-subtitle mb-2 text-muted">Vagas: {{ projeto.vagas }}</h5>
                 <p class="card-text">{{ projeto.descricao }}</p>
-                <div class="mt-auto d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button type="button" class="btn btn-success btn-lg">Participe</button>
+                <div class="mt-auto d-grid gap-2 d-md-flex justify-content-md-end align-items-center">
+                    <h3 class="card-subtitle mb-0 text-success">R$: {{ projeto.valor }}</h3>
+                    {% if request.session.email %}
+                    <a href="{% url 'confirmar_compra' projeto.id %}"><button type="button" class="btn btn-warning btn-lg">Comprar</button></a>
+                    {% else %}
+                    <a href="{% url 'form_login'%}"><button type="button" class="btn btn-warning btn-lg">Login</button></a>
+                    {% endif %}
                 </div>
             </div>
         </div>

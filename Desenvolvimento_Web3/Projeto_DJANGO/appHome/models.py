@@ -16,6 +16,15 @@ class Projeto(models.Model):
   criador = models.CharField(max_length=100)
   descricao = models.CharField(max_length=255)
   capa = models.ImageField(upload_to='imagens/')
+  valor = models.DecimalField(max_digits=10,decimal_places=2)
+  vagas = models.IntegerField()
+
+class Vendas(models.Model):
+  idUsuario = models.IntegerField()
+  idCurso = models.IntegerField()  
+  curso = models.CharField(max_length=100)
+  valorPago = models.DecimalField(max_digits=10,decimal_places=2)
+  dtCompra = models.DateField()
 
 class Foto(models.Model):
   titulo = models.CharField(max_length=100)
